@@ -8,7 +8,7 @@
           round
           icon="las la-bars"
           aria-label="Menu"
-          @click="toggleLeftDrawer"
+          @click="toggleSideMenu"
         />
 
         <q-toolbar-title> Quasar App </q-toolbar-title>
@@ -17,7 +17,7 @@
       </q-toolbar>
     </q-header>
 
-    <q-drawer v-model="leftDrawerOpen" show-if-above bordered>
+    <q-drawer v-model="isSideMenuOpen" show-if-above bordered>
       <q-list>
         <q-item-label header> Essential Links </q-item-label>
 
@@ -38,28 +38,11 @@
 <script>
 import EssentialLink from "components/EssentialLink.vue";
 
-const linksList = [
-  {
-    title: "Typography",
-    caption: "Tipos de letras",
-    icon: "las la-spell-check",
-    link: "typography",
-  },
-  {
-    title: "Flex Layout",
-    caption: "Estilos con flex",
-    icon: "las la-layer-group",
-    link: "flex",
-  },
-  {
-    title: "Docs",
-    caption: "quasar.dev",
-    icon: "las la-school",
-    link: "https://quasar.dev",
-  },
-];
+import { linksList } from "../router/linkList";
 
-import { defineComponent, ref } from "vue";
+import { defineComponent } from "vue";
+
+import useUi from "../composables/useUi";
 
 export default defineComponent({
   name: "MainLayout",
@@ -69,14 +52,12 @@ export default defineComponent({
   },
 
   setup() {
-    const leftDrawerOpen = ref(false);
+    const { isSideMenuOpen, toggleSideMenu } = useUi();
 
     return {
       essentialLinks: linksList,
-      leftDrawerOpen,
-      toggleLeftDrawer() {
-        leftDrawerOpen.value = !leftDrawerOpen.value;
-      },
+      isSideMenuOpen,
+      toggleSideMenu,
     };
   },
 });

@@ -12,10 +12,12 @@ import { createStore } from "vuex";
  * with the Store instance.
  */
 
+import ui from "./ui";
+
 export default store(function (/* { ssrContext } */) {
   const Store = createStore({
     modules: {
-      // example
+      ui,
     },
 
     // enable strict mode (adds overhead!)
